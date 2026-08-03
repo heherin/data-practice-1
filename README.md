@@ -1,16 +1,5 @@
 ## 데이터 수집 미니 파이프라인
 
-### 사용 API
-
-- **Open-Meteo (**서울 **3**일 ****시간대별 ****기온**·**강수확률**)**
-    - https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&hourly=temperature_2m,precipitation_probability&forecast_days=3&timezone=Asia/Seoul
-- **Countries.dev (**한국 ****국가 ****정보**)**
-    - https://countries.dev/alpha/KOR
-- **ip-api (IP** 기반 ****지역 ****정보**)**
-    - http://ip-api.com/json/8.8.8.8
-
----
-
 ## 실습 준비
 
 환경 ****준비
