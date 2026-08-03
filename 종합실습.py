@@ -42,10 +42,10 @@ class CountryName(BaseModel):
 
 
 class CountryInfo(BaseModel):
-    name: CountryName
-    capital: list[str] | None = None
+    name: str
+    capital: str | None = None
+    nativeName: str | None = None
     population: int = Field(gt=0, description="인구수는 0 이상")
-
 
 # 3. API 응답 스키마 (성공 / 에러 분리)
 class IpApiSuccessResponse(BaseModel):
@@ -65,10 +65,9 @@ class ApiErrorResponse(BaseModel):
 # ==================================
 urls = [
     "https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&hourly=temperature_2m,precipitation_probability&forecast_days=3&timezone=Asia/Seoul",
-    "https://restcountries.com/v3.1/alpha/KOR",
+    "https://countries.dev/alpha/KOR",
     "http://ip-api.com/json/8.8.8.8",
 ]
-
 
 # 단일 URL 비동기 요청 함수
 async def fetch(client: httpx.AsyncClient, url: str) -> Any | None:
@@ -93,10 +92,8 @@ def parse_and_validate(idx: int, data: Any):
             return validated
 
         elif idx == 1:
-            # v3.1 응답은 리스트 [ {...} ] 형태로 오므로 첫 번째 요소 추출
-            country_data = data[0] if isinstance(data, list) else data
-            validated = CountryInfo.model_validate(country_data)
-            logger.info(f"[국가 API 검증 성공] 국가명: {validated.name.common}, 인구수: {validated.population:,}명")
+            validated = CountryInfo.model_validate(data)
+            logger.info(f"[국가 API 검증 성공] 국가명: {validated.name}, 인구수: {validated.population:,}명")
             return validated
 
         elif idx == 2:
