@@ -1,0 +1,20 @@
+# 가상환경
+venv/
+.venv/
+env/
+
+# 파이썬 캐시
+__pycache__/
+*.pyc
+
+# 테스트/린트 캐시
+.pytest_cache/
+.ruff_cache/
+
+# 파이프라인 실행 산출물 (재생성 가능한 파일)
+validated_data.csv
+validated_data.parquet
+
+# 편집기 설정
+.vscode/
+.idea/
